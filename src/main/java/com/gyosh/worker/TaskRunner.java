@@ -1,5 +1,6 @@
 package com.gyosh.worker;
 
+import com.gyosh.worker.tasks.CaseFolding;
 import com.gyosh.worker.tasks.OwnStopWordRemoval;
 import com.gyosh.worker.tasks.StopWordRemoval;
 
@@ -42,6 +43,7 @@ public class TaskRunner {
         TaskRunner taskRunner = new TaskRunner(filename);
 
         taskRunner.addTask(new OwnStopWordRemoval("data/own-stopword.txt"));
+        taskRunner.addTask(new CaseFolding());
         taskRunner.addTask(new StopWordRemoval());
 
         taskRunner.run();
