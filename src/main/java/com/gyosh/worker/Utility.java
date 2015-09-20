@@ -20,7 +20,7 @@ public class Utility {
 
             String line = br.readLine();
             while (line != null) {
-                List<String> tokens = Arrays.asList(removeNonAscii(line).split("\\s+"));
+                List<String> tokens = Arrays.asList(removeNonAscii(line).trim().split("\\s+"));
                 doc.add(tokens);
                 line = br.readLine();
             }
@@ -50,5 +50,18 @@ public class Utility {
         }
 
         return list;
+    }
+
+    public static String join(List<String> list, String delimiter) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (i > 0) {
+                stringBuilder.append(delimiter);
+            }
+            stringBuilder.append(list.get(i));
+        }
+
+        return stringBuilder.toString();
     }
 }

@@ -1,7 +1,9 @@
 just some sample
+saya tidak menemukan bingkisan yang dikirimkan oleh bibi di meja belajar tadi malam 
 hello world
 hari ini makan warteg  lho
 wow!? nasinya yang ba nyak ya  !
 eéaà ada karakter ga jelas
+ ada leading space dan trailing space
 ini webnya http://www.vogella.com/tutorials/JavaRegularExpressions/article.html#examples wow
 doge https://github.com/ much wow

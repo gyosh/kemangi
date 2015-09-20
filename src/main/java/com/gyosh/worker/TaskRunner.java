@@ -1,25 +1,32 @@
 package com.gyosh.worker;
 
 import com.gyosh.worker.tasks.OwnStopWordRemoval;
+import com.gyosh.worker.tasks.StopWordRemoval;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class TaskRunner {
-    private Parameter param;
+    private String filename;
+    private Queue<Task> taskQueue;
 
-    private TaskRunner(Parameter param) {
-        this.param = param;
+    public TaskRunner(String filename) {
+        this.filename = filename;
+        taskQueue = new LinkedList<Task>();
     }
 
-    public static void main(String args[]) {
-        String filename = "data/test-input.txt";
+    public void addTask(Task task) {
+        taskQueue.add(task);
+    }
+
+    public void run() {
         List<List<String>> doc = Utility.loadAndSanitizeDocument(filename);
 
-        Parameter param = new Parameter();
-        param.setOwnStopwordFilename("data/own-stopword.txt");
-
-        Task wow = new OwnStopWordRemoval();
-        doc = wow.exec(doc, param);
+        while (!taskQueue.isEmpty()) {
+            Task task = taskQueue.poll();
+            doc = task.exec(doc);
+        }
 
         for (List<String> tokens : doc) {
             for (String token : tokens) {
@@ -27,5 +34,16 @@ public class TaskRunner {
             }
             System.out.println();
         }
+    }
+
+    public static void main(String args[]) {
+        String filename = "data/test-input.txt";
+
+        TaskRunner taskRunner = new TaskRunner(filename);
+
+        taskRunner.addTask(new OwnStopWordRemoval("data/own-stopword.txt"));
+        taskRunner.addTask(new StopWordRemoval());
+
+        taskRunner.run();
     }
 }
