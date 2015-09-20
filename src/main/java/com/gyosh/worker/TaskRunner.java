@@ -12,11 +12,11 @@ public class TaskRunner {
     }
 
     public static void main(String args[]) {
-        String filename = "/home/gyosh/IdeaProjects/kemangi/data/test-input.txt";
+        String filename = "data/test-input.txt";
         List<List<String>> doc = Utility.loadAndSanitizeDocument(filename);
 
         Parameter param = new Parameter();
-        param.setOwnStopwordFilename("/home/gyosh/IdeaProjects/kemangi/data/own-stopword.txt");
+        param.setOwnStopwordFilename("data/own-stopword.txt");
 
         Task wow = new OwnStopWordRemoval();
         doc = wow.exec(doc, param);
