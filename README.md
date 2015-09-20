@@ -1,6 +1,6 @@
 # Kemangi
 ### Easy Text Preprocessor For Indonesian Language
-Also known as Bahasa Indonesia
+Also known as Bahasa Indonesia.
 
 ## Overview
 
@@ -32,6 +32,8 @@ Developed as a request from Industrial Engineering students who were conducting 
 
 Got another feature request by 8/4/15, from next batch's students.
 Now Kemangi is maintained and evolving towards something like [Weka](http://www.cs.waikato.ac.nz/ml/weka).
+
+Currently under development, no stable release is ready.
 
 ## Term And Condition
 By using Kemangi, you need to agree for this [term and condition](http://fws.cs.ui.ac.id/StemmerSampleClient/TermAndCondition.jsp).

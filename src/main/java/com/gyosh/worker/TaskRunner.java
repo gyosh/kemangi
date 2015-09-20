@@ -1,9 +1,6 @@
 package com.gyosh.worker;
 
-import com.gyosh.worker.tasks.CaseFolding;
-import com.gyosh.worker.tasks.OwnStopWordRemoval;
-import com.gyosh.worker.tasks.Stem;
-import com.gyosh.worker.tasks.StopWordRemoval;
+import com.gyosh.worker.tasks.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -44,9 +41,11 @@ public class TaskRunner {
         TaskRunner taskRunner = new TaskRunner(filename);
 
         taskRunner.addTask(new OwnStopWordRemoval("data/own-stopword.txt"));
+        taskRunner.addTask(new NonAlphaNumericRemoval());
+        taskRunner.addTask(new OwnStopWordRemoval("data/own-stopword.txt"));
         taskRunner.addTask(new CaseFolding());
-        taskRunner.addTask(new StopWordRemoval());
-        taskRunner.addTask(new Stem());
+//        taskRunner.addTask(new StopWordRemoval());
+//        taskRunner.addTask(new Stem());
 
         taskRunner.run();
     }
