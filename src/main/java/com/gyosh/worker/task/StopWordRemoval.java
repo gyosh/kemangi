@@ -1,6 +1,5 @@
-package com.gyosh.worker.tasks;
+package com.gyosh.worker.task;
 
-import com.gyosh.worker.Task;
 import com.gyosh.worker.Utility;
 import org.reficio.ws.builder.*;
 import org.reficio.ws.builder.core.Wsdl;
@@ -18,12 +17,12 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class Stem implements Task {
-    private static final String WSDL_URI = "http://fws.cs.ui.ac.id/Stemmer/Stemmer?wsdl";
-    private static final String END_POINT_URI = "http://fws.cs.ui.ac.id:80/Stemmer/Stemmer";
-    private static final String PORT_BINDING = "StemmerPortBinding";
+public class StopWordRemoval implements Task {
+    private static final String WSDL_URI = "http://fws.cs.ui.ac.id/StopwordRemover/StopwordRemover?wsdl";
+    private static final String END_POINT_URI = "http://fws.cs.ui.ac.id:80/StopwordRemover/StopwordRemover";
+    private static final String PORT_BINDING = "StopwordRemoverPortBinding";
     private static final String SOAP_ACTION = "";
-    private static final String SOAP_ACTION_NAME = "StemSentence";
+    private static final String SOAP_ACTION_NAME = "removeStopword";
     private static final String REQUEST_FIELD = "sentence";
     private static final String RESPONSE_FIELD = "return";
 
@@ -38,7 +37,7 @@ public class Stem implements Task {
         initRequestEditor();
 
         for (int i = 0; i < doc.size(); i++) {
-            doc.set(i, stemSentence(doc.get(i)));
+            doc.set(i, removeStopWord(doc.get(i)));
         }
 
         return doc;
@@ -84,7 +83,7 @@ public class Stem implements Task {
         }
     }
 
-    private List<String> stemSentence(List<String> tokens) {
+    private List<String> removeStopWord(List<String> tokens) {
         Node word = requestXml.getElementsByTagName(REQUEST_FIELD).item(0);
         word.setTextContent(Utility.join(tokens, " "));
 

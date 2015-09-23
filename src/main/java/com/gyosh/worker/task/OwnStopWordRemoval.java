@@ -1,6 +1,5 @@
-package com.gyosh.worker.tasks;
+package com.gyosh.worker.task;
 
-import com.gyosh.worker.Task;
 import com.gyosh.worker.Utility;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.gyosh.worker;
+package com.gyosh.worker.task;
 
 import java.util.List;
 

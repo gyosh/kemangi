@@ -1,6 +1,6 @@
 package com.gyosh.worker;
 
-import com.gyosh.worker.tasks.*;
+import com.gyosh.worker.task.*;
 
 import java.util.LinkedList;
 import java.util.List;

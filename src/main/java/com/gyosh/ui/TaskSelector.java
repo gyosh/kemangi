@@ -1,18 +1,31 @@
 package com.gyosh.ui;
 
+import com.gyosh.worker.factory.CaseFoldingFactory;
+import com.gyosh.worker.factory.OwnStopWordRemovalFactory;
+import com.gyosh.worker.factory.TaskFactory;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskSelector extends JDialog {
+    private JDialog jDialog;
     private JPanel contentPane;
     private JButton selectButton;
     private JButton cancelButton;
-    private JList tasks;
+    private JList taskFactoryList;
     private JLabel taskDescription;
     private JPanel mainPanel;
-    private JPanel requirementPanel;
+    private JPanel parameterPanel;
 
     public TaskSelector() {
+        initUI();
+    }
+
+    private void initUI() {
+        jDialog = this;
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(selectButton);
@@ -55,10 +68,7 @@ public class TaskSelector extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        TaskSelector dialog = new TaskSelector();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+    private void createUIComponents() {
+        parameterPanel = new JPanel();
     }
 }

@@ -1,9 +1,8 @@
 package com.gyosh.ui;
 
-import com.gyosh.worker.Task;
-import com.gyosh.worker.tasks.CaseFolding;
-import com.gyosh.worker.tasks.NonAlphaNumericRemoval;
-import com.gyosh.worker.tasks.OwnStopWordRemoval;
+import com.gyosh.worker.factory.CaseFoldingFactory;
+import com.gyosh.worker.factory.OwnStopWordRemovalFactory;
+import com.gyosh.worker.factory.TaskFactory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,6 +26,7 @@ public class Main {
 
     private File inputFile;
     private TaskSelector taskSelector;
+    private List<TaskFactory> taskFactories;
 
     public Main() {
         browseInputFile.addActionListener(new ActionListener() {
