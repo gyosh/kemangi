@@ -10,9 +10,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class OwnStopWordRemovalFactory implements TaskFactory {
-    private JPanel parameterPanel;
-    private JTextField filePath;
-    private JButton browseFile;
+    // Singletons
+    private static JPanel parameterPanel;
+    private static JTextField filePath;
+    private static JButton browseFile;
 
     public OwnStopWordRemovalFactory() {
         initParameterPanel();
@@ -29,6 +30,9 @@ public class OwnStopWordRemovalFactory implements TaskFactory {
     }
 
     public JPanel getParameterPanel() {
+        if (parameterPanel == null) {
+            initParameterPanel();
+        }
         return parameterPanel;
     }
 

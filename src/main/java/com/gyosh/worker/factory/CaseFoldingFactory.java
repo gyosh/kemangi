@@ -1,16 +1,13 @@
 package com.gyosh.worker.factory;
 
 import com.gyosh.worker.task.CaseFolding;
-import com.gyosh.worker.task.OwnStopWordRemoval;
 import com.gyosh.worker.task.Task;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
 public class CaseFoldingFactory implements TaskFactory{
-    private JPanel parameterPanel;
+    // Singleton
+    private static JPanel parameterPanel;
 
     public CaseFoldingFactory() {
         initParameterPanel();
@@ -27,6 +24,9 @@ public class CaseFoldingFactory implements TaskFactory{
     }
 
     public JPanel getParameterPanel() {
+        if (parameterPanel == null) {
+            initParameterPanel();
+        }
         return parameterPanel;
     }
 
