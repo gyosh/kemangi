@@ -3,14 +3,14 @@ package com.gyosh.ui;
 import com.gyosh.worker.factory.CaseFoldingFactory;
 import com.gyosh.worker.factory.OwnStopWordRemovalFactory;
 import com.gyosh.worker.factory.TaskFactory;
+import com.gyosh.worker.task.Task;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TaskSelector extends JDialog {
-    private JDialog jDialog;
     private JPanel contentPane;
     private JButton selectButton;
     private JButton cancelButton;
@@ -19,20 +19,27 @@ public class TaskSelector extends JDialog {
     private JPanel mainPanel;
     private JPanel parameterPanel;
 
+    private TaskFactory selectedTaskFactory;
+    private TaskFactory[] taskFactories = {
+        new CaseFoldingFactory(),
+        new OwnStopWordRemovalFactory()
+    };
+
+    private Task taskCreated;
+
     public TaskSelector() {
-        initUI();
-    }
-
-    private void initUI() {
-        jDialog = this;
-
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(selectButton);
 
+        taskFactoryList.setListData(taskFactories);
+        addListeners();
+    }
+
+    private void addListeners() {
         selectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onOk();
             }
         });
 
@@ -56,19 +63,42 @@ public class TaskSelector extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        taskFactoryList.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                if (!listSelectionEvent.getValueIsAdjusting()) {
+                    int index = taskFactoryList.getSelectedIndex();
+                    selectedTaskFactory = taskFactories[index];
+                    updateFieldOnSelection();
+                }
+            }
+        });
     }
 
-    private void onOK() {
-        // add your code here
+    public Task getCreatedTask() {
+        return taskCreated;
+    }
+
+    private void onOk() {
+        taskCreated = selectedTaskFactory.createTask();
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
     private void createUIComponents() {
         parameterPanel = new JPanel();
+    }
+
+    private void updateFieldOnSelection() {
+        taskDescription.setText(selectedTaskFactory.getDescription());
+
+        parameterPanel.removeAll();
+        parameterPanel.add(selectedTaskFactory.getParameterPanel());
+
+        parameterPanel.revalidate();
+        parameterPanel.repaint();
     }
 }

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OwnStopWordRemoval implements Task {
+    public static final String TASK_NAME = "Own Stop Word Removal";
+
     private String ownStopWordFilename;
     private List<String> ownStopWords;
 
@@ -45,5 +47,9 @@ public class OwnStopWordRemoval implements Task {
             }
         }
         return false;
+    }
+
+    public String toString() {
+        return TASK_NAME;
     }
 }

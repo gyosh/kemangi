@@ -64,4 +64,8 @@ public class OwnStopWordRemovalFactory implements TaskFactory {
             }
         });
     }
+
+    public String toString() {
+        return OwnStopWordRemoval.TASK_NAME;
+    }
 }

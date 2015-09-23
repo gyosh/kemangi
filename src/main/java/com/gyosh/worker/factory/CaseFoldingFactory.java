@@ -39,4 +39,8 @@ public class CaseFoldingFactory implements TaskFactory{
         // TODO: refactor these repeated text
         parameterPanel.add(new JLabel("No Input Necessary"));
     }
+
+    public String toString() {
+        return CaseFolding.TASK_NAME;
+    }
 }

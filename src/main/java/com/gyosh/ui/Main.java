@@ -3,6 +3,7 @@ package com.gyosh.ui;
 import com.gyosh.worker.factory.CaseFoldingFactory;
 import com.gyosh.worker.factory.OwnStopWordRemovalFactory;
 import com.gyosh.worker.factory.TaskFactory;
+import com.gyosh.worker.task.Task;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -26,7 +27,9 @@ public class Main {
 
     private File inputFile;
     private TaskSelector taskSelector;
-    private List<TaskFactory> taskFactories;
+    private List<Task> tasks;
+
+    private DefaultListModel taskListModel;
 
     public Main() {
         browseInputFile.addActionListener(new ActionListener() {
@@ -57,10 +60,13 @@ public class Main {
                 taskSelector = new TaskSelector();
                 taskSelector.pack();
                 taskSelector.setVisible(true);
+
+                taskListModel.addElement(taskSelector.getCreatedTask());
             }
         });
         removeTask.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
+                
             }
         });
     }
@@ -73,5 +79,10 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    private void createUIComponents() {
+        taskListModel = new DefaultListModel();
+        taskList = new JList(taskListModel);
     }
 }

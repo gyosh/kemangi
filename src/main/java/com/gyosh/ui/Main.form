@@ -16,7 +16,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="6941b" class="javax.swing.JList" binding="taskList">
+          <component id="6941b" class="javax.swing.JList" binding="taskList" custom-create="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="200" height="100"/>
