@@ -133,7 +133,10 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
           </component>
           <component id="9bc27" class="javax.swing.JButton" binding="browseInputFile">
             <constraints>
