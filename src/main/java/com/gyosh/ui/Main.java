@@ -62,11 +62,19 @@ public class Main {
                 taskSelector.setVisible(true);
 
                 taskListModel.addElement(taskSelector.getCreatedTask());
+                taskList.updateUI();
             }
         });
+
         removeTask.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
+                int selectedIndex = taskList.getSelectedIndex();
 
+                if ((0 <= selectedIndex) && (selectedIndex < taskListModel.getSize())) {
+                    taskListModel.remove(selectedIndex);
+                    taskList.setSelectedIndex(Math.min(selectedIndex, taskListModel.getSize() - 1));
+                    taskList.updateUI();
+                }
             }
         });
 
