@@ -3,7 +3,7 @@ package com.gyosh.ui;
 import com.gyosh.worker.factory.CaseFoldingFactory;
 import com.gyosh.worker.factory.OwnStopWordRemovalFactory;
 import com.gyosh.worker.factory.TaskFactory;
-import com.gyosh.worker.task.Task;
+import com.gyosh.worker.task.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -66,7 +66,31 @@ public class Main {
         });
         removeTask.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                
+
+            }
+        });
+
+        previousTask.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                int selectedIndex = taskList.getSelectedIndex();
+
+                if (selectedIndex - 1 >= 0) {
+                    swapTask(selectedIndex - 1, selectedIndex);
+                    taskList.setSelectedIndex(selectedIndex - 1);
+                    taskList.updateUI();
+                }
+            }
+        });
+
+        nextTask.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                int selectedIndex = taskList.getSelectedIndex();
+
+                if (selectedIndex + 1 < taskListModel.getSize()) {
+                    swapTask(selectedIndex, selectedIndex + 1);
+                    taskList.setSelectedIndex(selectedIndex + 1);
+                    taskList.updateUI();
+                }
             }
         });
     }
@@ -84,5 +108,11 @@ public class Main {
     private void createUIComponents() {
         taskListModel = new DefaultListModel();
         taskList = new JList(taskListModel);
+    }
+
+    private void swapTask(int index1, int index2) {
+        Task temp = (Task)taskListModel.get(index1);
+        taskListModel.set(index1, taskListModel.get(index2));
+        taskListModel.set(index2, temp);
     }
 }
