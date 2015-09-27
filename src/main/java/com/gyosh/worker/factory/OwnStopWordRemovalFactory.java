@@ -8,8 +8,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OwnStopWordRemovalFactory implements TaskFactory {
+    private static final String NO_STOP_WORD_FILE = "Please specify your stop word list file!";
+
     // Singletons
     private static JPanel parameterPanel;
     private static JTextField filePath;
@@ -63,6 +67,14 @@ public class OwnStopWordRemovalFactory implements TaskFactory {
                 }
             }
         });
+    }
+
+    public List<String> validateInput() {
+        List<String> errors = new ArrayList<String>();
+        if (filePath.getText().isEmpty()) {
+            errors.add(NO_STOP_WORD_FILE);
+        }
+        return errors;
     }
 
     public String toString() {

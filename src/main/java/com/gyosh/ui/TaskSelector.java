@@ -1,5 +1,6 @@
 package com.gyosh.ui;
 
+import com.gyosh.worker.Utility;
 import com.gyosh.worker.factory.*;
 import com.gyosh.worker.task.Task;
 
@@ -7,6 +8,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
+import java.util.List;
 
 public class TaskSelector extends JDialog {
     private JPanel contentPane;
@@ -81,6 +83,13 @@ public class TaskSelector extends JDialog {
     }
 
     private void onOk() {
+        List<String> inputErrors = selectedTaskFactory.validateInput();
+
+        if (inputErrors.size() > 0) {
+            JOptionPane.showMessageDialog(null, Utility.join(inputErrors, "\n"));
+            return;
+        }
+
         taskCreated = selectedTaskFactory.createTask();
         dispose();
     }
