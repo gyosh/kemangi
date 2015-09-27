@@ -1,16 +1,21 @@
 package com.gyosh.ui;
 
 import com.gyosh.worker.TaskRunner;
+import com.gyosh.worker.Utility;
 import com.gyosh.worker.task.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     private static final int TIMER_INTERVAL = 100;
+    private static final String NO_INPUT = "Please specify input file!";
+    private static final String NO_TASK = "Please add at least one task!";
+    private static final String NO_OUTPUT = "Please specify output file!";
 
     private JList taskList;
     private JButton addTask;
@@ -60,6 +65,12 @@ public class Main {
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
+                List<String> inputErrors = validateInput();
+                if (inputErrors.size() > 0) {
+                    JOptionPane.showMessageDialog(null, Utility.join(inputErrors, "\n"));
+                    return;
+                }
+
                 taskRunner = new TaskRunner(inputFilePath.getText(), outputFilePath.getText());
                 for (int i = 0; i < taskListModel.getSize(); i++) {
                     taskRunner.addTask((Task)taskListModel.get(i));
@@ -151,6 +162,22 @@ public class Main {
         progressBar.updateUI();
 
         progressLog.setText(taskRunner.getActivity());
+    }
+
+    private List<String> validateInput() {
+        List<String> errors = new ArrayList<String>();
+
+        if (inputFilePath.getText().isEmpty()) {
+            errors.add(NO_INPUT);
+        }
+        if (taskListModel.getSize() == 0) {
+            errors.add(NO_TASK);
+        }
+        if (outputFilePath.getText().isEmpty()) {
+            errors.add(NO_OUTPUT);
+        }
+
+        return errors;
     }
 
     public static void main(String[] args) {
