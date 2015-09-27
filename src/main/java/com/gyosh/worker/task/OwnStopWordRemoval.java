@@ -50,6 +50,6 @@ public class OwnStopWordRemoval implements Task {
     }
 
     public String toString() {
-        return TASK_NAME;
+        return TASK_NAME + " (" + ownStopWordFilename + ")";
     }
 }
