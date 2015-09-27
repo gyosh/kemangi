@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Stem implements Task {
+    public static final String TASK_NAME = "Stem";
+
     private static final String WSDL_URI = "http://fws.cs.ui.ac.id/Stemmer/Stemmer?wsdl";
     private static final String END_POINT_URI = "http://fws.cs.ui.ac.id:80/Stemmer/Stemmer";
     private static final String PORT_BINDING = "StemmerPortBinding";

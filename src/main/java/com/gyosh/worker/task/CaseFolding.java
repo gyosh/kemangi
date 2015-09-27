@@ -3,7 +3,7 @@ package com.gyosh.worker.task;
 import java.util.List;
 
 public class CaseFolding implements Task {
-    public static final String TASK_NAME = "Case Folding";
+    public static final String TASK_NAME = "Case folding";
 
     public List<List<String>> exec(List<List<String>> doc) {
         for (List<String> tokens : doc) {

@@ -1,26 +1,30 @@
 package com.gyosh.worker.factory;
 
-import com.gyosh.worker.task.CaseFolding;
+import com.gyosh.worker.task.NonAlphaNumericRemoval;
+import com.gyosh.worker.task.Stem;
 import com.gyosh.worker.task.Task;
 
 import javax.swing.*;
 
-public class CaseFoldingFactory implements TaskFactory{
+/**
+ * Created by gyosh on 9/27/15.
+ */
+public class StemFactory implements TaskFactory{
     // Singleton
     private static JPanel parameterPanel;
 
-    public CaseFoldingFactory() {
+    public StemFactory() {
         initParameterPanel();
     }
 
     public String getDescription() {
         // TODO: real description
-        return "Case Folding Description";
+        return "Description";
     }
 
     public String getIncludedTask() {
         // TODO: real included task
-        return "Case Folding Task";
+        return "Task";
     }
 
     public JPanel getParameterPanel() {
@@ -31,7 +35,7 @@ public class CaseFoldingFactory implements TaskFactory{
     }
 
     public Task createTask() {
-        return new CaseFolding();
+        return new Stem();
     }
 
     private void initParameterPanel() {
@@ -40,6 +44,7 @@ public class CaseFoldingFactory implements TaskFactory{
     }
 
     public String toString() {
-        return CaseFolding.TASK_NAME;
+        return Stem.TASK_NAME;
     }
 }
+

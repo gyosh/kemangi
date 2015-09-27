@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class NonAlphaNumericRemoval implements Task {
+    public static final String TASK_NAME = "Non alphanumeric removal";
+
     public List<List<String>> exec(List<List<String>> doc) {
         for (int i = 0; i < doc.size(); i++) {
             doc.set(i, removeNonAlphaNumeric(doc.get(i)));

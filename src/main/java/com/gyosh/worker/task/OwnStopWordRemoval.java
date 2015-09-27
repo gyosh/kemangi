@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OwnStopWordRemoval implements Task {
-    public static final String TASK_NAME = "Own Stop Word Removal";
+    public static final String TASK_NAME = "Own stop words removal";
 
     private String ownStopWordFilename;
     private List<String> ownStopWords;

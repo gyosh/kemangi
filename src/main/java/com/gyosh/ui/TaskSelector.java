@@ -1,8 +1,6 @@
 package com.gyosh.ui;
 
-import com.gyosh.worker.factory.CaseFoldingFactory;
-import com.gyosh.worker.factory.OwnStopWordRemovalFactory;
-import com.gyosh.worker.factory.TaskFactory;
+import com.gyosh.worker.factory.*;
 import com.gyosh.worker.task.Task;
 
 import javax.swing.*;
@@ -22,7 +20,10 @@ public class TaskSelector extends JDialog {
     private TaskFactory selectedTaskFactory;
     private TaskFactory[] taskFactories = {
         new CaseFoldingFactory(),
-        new OwnStopWordRemovalFactory()
+        new NonAlphaNumericRemovalFactory(),
+        new OwnStopWordRemovalFactory(),
+        new StopWordRemovalFactory(),
+        new StemFactory()
     };
 
     private Task taskCreated;

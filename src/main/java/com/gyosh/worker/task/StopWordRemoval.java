@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StopWordRemoval implements Task {
+    public static final String TASK_NAME = "Stop words removal";
+
     private static final String WSDL_URI = "http://fws.cs.ui.ac.id/StopwordRemover/StopwordRemover?wsdl";
     private static final String END_POINT_URI = "http://fws.cs.ui.ac.id:80/StopwordRemover/StopwordRemover";
     private static final String PORT_BINDING = "StopwordRemoverPortBinding";

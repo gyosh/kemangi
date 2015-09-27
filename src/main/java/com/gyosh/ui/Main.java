@@ -29,7 +29,6 @@ public class Main {
     private File inputFile;
     private File outputFile;
     private TaskSelector taskSelector;
-    private List<Task> tasks;
     private TaskRunner taskRunner;
     private Timer progressTicker;
 
