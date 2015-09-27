@@ -117,4 +117,8 @@ public class StopWordRemoval implements Task {
         }
         return Arrays.asList(ret.trim().split(" "));
     }
+
+    public String toString() {
+        return TASK_NAME;
+    }
 }

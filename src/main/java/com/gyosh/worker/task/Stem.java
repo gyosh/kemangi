@@ -117,4 +117,8 @@ public class Stem implements Task {
         }
         return Arrays.asList(ret.trim().split(" "));
     }
+
+    public String toString() {
+        return TASK_NAME;
+    }
 }

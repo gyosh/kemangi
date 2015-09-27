@@ -20,4 +20,8 @@ public class NonAlphaNumericRemoval implements Task {
         String cleanedSentence = sentence.replaceAll("[^0-9A-Za-z]", " ").trim();
         return Arrays.asList(cleanedSentence.split("\\s+"));
     }
+
+    public String toString() {
+        return TASK_NAME;
+    }
 }
