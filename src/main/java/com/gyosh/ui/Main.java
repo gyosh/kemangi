@@ -1,18 +1,17 @@
 package com.gyosh.ui;
 
-import com.gyosh.worker.factory.CaseFoldingFactory;
-import com.gyosh.worker.factory.OwnStopWordRemovalFactory;
-import com.gyosh.worker.factory.TaskFactory;
+import com.gyosh.worker.TaskRunner;
 import com.gyosh.worker.task.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    private static final int TIMER_INTERVAL = 100;
+
     private JList taskList;
     private JButton addTask;
     private JButton removeTask;
@@ -21,13 +20,18 @@ public class Main {
     private JButton start;
     private JProgressBar progressBar;
     private JPanel mainPanel;
+    private JLabel progressLog;
     private JTextField inputFilePath;
     private JButton browseInputFile;
-    private JLabel progressLog;
+    private JTextField outputFilePath;
+    private JButton browseOutputFile;
 
     private File inputFile;
+    private File outputFile;
     private TaskSelector taskSelector;
     private List<Task> tasks;
+    private TaskRunner taskRunner;
+    private Timer progressTicker;
 
     private DefaultListModel taskListModel;
 
@@ -44,14 +48,43 @@ public class Main {
             }
         });
 
-        start.addActionListener(new ActionListener() {
+        browseOutputFile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 final JFileChooser fileChooser = new JFileChooser();
-
                 int returnVal = fileChooser.showSaveDialog(mainPanel);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File outputFile = fileChooser.getSelectedFile();
+                    outputFile = fileChooser.getSelectedFile();
+                    outputFilePath.setText(outputFile.getAbsolutePath());
                 }
+            }
+        });
+
+        start.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                taskRunner = new TaskRunner(inputFilePath.getText(), outputFilePath.getText());
+                for (int i = 0; i < taskListModel.getSize(); i++) {
+                    taskRunner.addTask((Task)taskListModel.get(i));
+                }
+
+                progressBar.setMinimum(0);
+                progressBar.setMaximum(100);
+                progressTicker = new Timer(TIMER_INTERVAL, new ActionListener() {
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        updateProgress();
+                    }
+                });
+
+                Runnable taskRunnerWrapper = new Runnable() {
+                    public void run() {
+                        progressTicker.start();
+
+                        taskRunner.run();
+
+                        updateProgress();
+                        progressTicker.stop();
+                    }
+                };
+                new Thread(taskRunnerWrapper).start();
             }
         });
 
@@ -103,16 +136,6 @@ public class Main {
         });
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Kemangi");
-
-        Main main = new Main();
-        frame.setContentPane(main.mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
     private void createUIComponents() {
         taskListModel = new DefaultListModel();
         taskList = new JList(taskListModel);
@@ -122,5 +145,22 @@ public class Main {
         Task temp = (Task)taskListModel.get(index1);
         taskListModel.set(index1, taskListModel.get(index2));
         taskListModel.set(index2, temp);
+    }
+
+    private void updateProgress() {
+        progressBar.setValue(taskRunner.getProgressPercentage());
+        progressBar.updateUI();
+
+        progressLog.setText(taskRunner.getActivity());
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Kemangi");
+
+        Main main = new Main();
+        frame.setContentPane(main.mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 }

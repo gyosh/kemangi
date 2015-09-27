@@ -2,17 +2,35 @@ package com.gyosh.worker;
 
 import com.gyosh.worker.task.*;
 
+import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class TaskRunner {
-    private String filename;
-    private Queue<Task> taskQueue;
+    private static final String STATUS_WAITING = "Waiting for input...";
+    private static final String STATUS_READING = "Reading input...";
+    private static final String STATUS_WRITING = "Writing output...";
+    private static final String STATUS_DONE = "Finished";
 
-    public TaskRunner(String filename) {
-        this.filename = filename;
+    private static final int WEIGHT_READ_INPUT = 1;
+    private static final int WEIGHT_WRITE_OUTPUT = 1;
+
+    private String inputFilePath;
+    private String outputFilePath;
+    private Queue<Task> taskQueue;
+    private List<List<String>> doc;
+
+    private int totalTaskWeight;
+    private int currentTaskWeight;
+    private String currentActivity;
+
+    public TaskRunner(String inputFilePath, String outputFilePath) {
+        this.inputFilePath = inputFilePath;
+        this.outputFilePath = outputFilePath;
+
         taskQueue = new LinkedList<Task>();
+        currentActivity = STATUS_WAITING;
     }
 
     public void addTask(Task task) {
@@ -20,33 +38,54 @@ public class TaskRunner {
     }
 
     public void run() {
-        List<List<String>> doc = Utility.loadAndSanitizeDocument(filename);
+        totalTaskWeight = WEIGHT_READ_INPUT + taskQueue.size() + WEIGHT_WRITE_OUTPUT;
+        currentTaskWeight = 0;
+
+        currentActivity = STATUS_READING;
+        doc = Utility.loadAndSanitizeDocument(inputFilePath);
+        currentTaskWeight += WEIGHT_READ_INPUT;
 
         while (!taskQueue.isEmpty()) {
-            Task task = taskQueue.poll();
-            doc = task.exec(doc);
+            Task currentTask = taskQueue.poll();
+
+            doc = currentTask.exec(doc);
+            currentTaskWeight++;
+            currentActivity = currentTask.toString();
         }
 
-        for (List<String> tokens : doc) {
-            for (String token : tokens) {
-                System.out.print(token + " ");
-            }
-            System.out.println();
-        }
+        currentActivity = STATUS_WRITING;
+        exportDocument();
+        currentTaskWeight += WEIGHT_WRITE_OUTPUT;
+
+        currentActivity = STATUS_DONE;
     }
 
-    public static void main(String args[]) {
-        String filename = "data/test-input.txt";
+    public int getProgressPercentage() {
+        return 100 * currentTaskWeight / totalTaskWeight;
+    }
 
-        TaskRunner taskRunner = new TaskRunner(filename);
+    public String getActivity() {
+        return currentActivity;
+    }
 
-        taskRunner.addTask(new OwnStopWordRemoval("data/own-stopword.txt"));
-        taskRunner.addTask(new NonAlphaNumericRemoval());
-        taskRunner.addTask(new OwnStopWordRemoval("data/own-stopword.txt"));
-        taskRunner.addTask(new CaseFolding());
-//        taskRunner.addTask(new StopWordRemoval());
-//        taskRunner.addTask(new Stem());
+    private void exportDocument() {
+        try {
+            FileWriter fw = new FileWriter(outputFilePath);
+            BufferedWriter bw = new BufferedWriter(fw);
 
-        taskRunner.run();
+            for (List<String> tokens : doc) {
+                for (int i = 0; i < tokens.size(); i++) {
+                    bw.write(tokens.get(i));
+                    if (i + 1 < tokens.size()) {
+                        bw.write(" ");
+                    }
+                }
+                bw.newLine();
+            }
+
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
