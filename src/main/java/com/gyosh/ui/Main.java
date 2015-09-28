@@ -3,6 +3,7 @@ package com.gyosh.ui;
 import com.gyosh.worker.TaskRunner;
 import com.gyosh.worker.Utility;
 import com.gyosh.worker.task.*;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ public class Main {
     private static final String NO_INPUT = "Please specify input file!";
     private static final String NO_TASK = "Please add at least one task!";
     private static final String NO_OUTPUT = "Please specify output file!";
+    private static final Logger logger = Logger.getLogger(Main.class);
 
     private JList taskList;
     private JButton addTask;
@@ -36,7 +38,6 @@ public class Main {
     private TaskSelector taskSelector;
     private TaskRunner taskRunner;
     private Timer progressTicker;
-
     private DefaultListModel taskListModel;
 
     public Main() {
@@ -90,8 +91,8 @@ public class Main {
 
                         taskRunner.run();
 
-                        updateProgress();
                         progressTicker.stop();
+                        updateProgress();
                     }
                 };
                 new Thread(taskRunnerWrapper).start();

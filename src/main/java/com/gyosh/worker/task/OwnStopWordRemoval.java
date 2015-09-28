@@ -1,12 +1,14 @@
 package com.gyosh.worker.task;
 
 import com.gyosh.worker.Utility;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OwnStopWordRemoval implements Task {
     public static final String TASK_NAME = "Own stop words removal";
+    private static final Logger logger = Logger.getLogger(OwnStopWordRemoval.class);
 
     private String ownStopWordFilename;
     private List<String> ownStopWords;
@@ -34,8 +36,7 @@ public class OwnStopWordRemoval implements Task {
                 }
             }
         } catch (Exception e) {
-            // TODO: logging
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return cleanedTokens;
     }

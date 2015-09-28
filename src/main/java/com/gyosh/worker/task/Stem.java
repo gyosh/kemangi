@@ -1,6 +1,7 @@
 package com.gyosh.worker.task;
 
 import com.gyosh.worker.Utility;
+import org.apache.log4j.Logger;
 import org.reficio.ws.builder.*;
 import org.reficio.ws.builder.core.Wsdl;
 import org.reficio.ws.client.core.SoapClient;
@@ -27,6 +28,7 @@ public class Stem implements Task {
     private static final String SOAP_ACTION_NAME = "StemSentence";
     private static final String REQUEST_FIELD = "sentence";
     private static final String RESPONSE_FIELD = "return";
+    private static final Logger logger = Logger.getLogger(Stem.class);
 
     private Document requestXml;
     private SoapClient client;
@@ -70,8 +72,7 @@ public class Stem implements Task {
             docBuilder = docFactory.newDocumentBuilder();
             requestXml = docBuilder.parse(is);
         } catch (Exception e) {
-            e.printStackTrace();
-            // TODO: logging
+            logger.error(e.getMessage());
         }
     }
 
@@ -80,8 +81,7 @@ public class Stem implements Task {
         try {
             transformer = transformerFactory.newTransformer();
         } catch (Exception e) {
-            e.printStackTrace();
-            // TODO: logging
+            logger.error(e.getMessage());
         }
     }
 
@@ -95,8 +95,7 @@ public class Stem implements Task {
             transformer.transform(new DOMSource(requestXml), new StreamResult(writer));
             request = writer.getBuffer().toString();
         } catch (Exception e) {
-            e.printStackTrace();
-            // TODO: logging
+            logger.error(e.getMessage());
         }
 
         String response = client.post(request);
@@ -112,8 +111,7 @@ public class Stem implements Task {
             Node word = responseXml.getElementsByTagName(RESPONSE_FIELD).item(0);
             ret = word.getTextContent();
         } catch (Exception e) {
-            e.printStackTrace();
-            // TODO: logging
+            logger.error(e.getMessage());
         }
         return Arrays.asList(ret.trim().split(" "));
     }

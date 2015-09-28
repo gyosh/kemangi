@@ -1,5 +1,7 @@
 package com.gyosh.worker;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,6 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Utility {
+    private static final Logger logger = Logger.getLogger(Utility.class);
+
     public static String removeNonAscii(String line) {
         return line.replaceAll("[^\\p{ASCII}]", " ");
     }
@@ -25,8 +29,7 @@ public class Utility {
                 line = br.readLine();
             }
         } catch (IOException ioException) {
-            // TODO: logging
-            ioException.printStackTrace();
+            logger.error(ioException.getMessage());
         }
 
         return doc;
@@ -45,8 +48,7 @@ public class Utility {
                 line = br.readLine();
             }
         } catch (IOException ioException) {
-            // TODO: logging
-            ioException.printStackTrace();
+            logger.error(ioException.getMessage());
         }
 
         return list;

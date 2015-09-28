@@ -12,6 +12,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.8.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.4" level="project" />
     <orderEntry type="library" name="Maven: org.reficio:soap-builder:1.0.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.reficio:soap-common:1.0.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: wsdl4j:wsdl4j:1.6.2" level="project" />
