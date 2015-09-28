@@ -1,6 +1,6 @@
 package com.gyosh.worker.task;
 
-import com.gyosh.worker.Utility;
+import com.gyosh.worker.utility.Util;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class NonAlphaNumericRemoval implements Task {
     }
 
     private List<String> removeNonAlphaNumeric(List<String> tokens) {
-        String sentence = Utility.join(tokens, " ");
+        String sentence = Util.join(tokens, " ");
         String cleanedSentence = sentence.replaceAll("[^0-9A-Za-z]", " ").trim();
         return Arrays.asList(cleanedSentence.split("\\s+"));
     }

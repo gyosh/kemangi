@@ -1,4 +1,4 @@
-package com.gyosh.worker;
+package com.gyosh.worker.utility;
 
 import org.apache.log4j.Logger;
 
@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Utility {
-    private static final Logger logger = Logger.getLogger(Utility.class);
+public class Util {
+    private static final Logger logger = Logger.getLogger(Util.class);
 
     public static String removeNonAscii(String line) {
         return line.replaceAll("[^\\p{ASCII}]", " ");

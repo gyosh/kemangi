@@ -1,6 +1,7 @@
 package com.gyosh.worker;
 
 import com.gyosh.worker.task.*;
+import com.gyosh.worker.utility.Util;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -44,7 +45,7 @@ public class TaskRunner {
         currentTask = null;
 
         currentActivity = STATUS_READING;
-        doc = Utility.loadAndSanitizeDocument(inputFilePath);
+        doc = Util.loadAndSanitizeDocument(inputFilePath);
         currentTaskWeight += WEIGHT_READ_INPUT;
 
         while (!taskQueue.isEmpty()) {

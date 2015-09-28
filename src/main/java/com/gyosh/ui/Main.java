@@ -1,7 +1,7 @@
 package com.gyosh.ui;
 
 import com.gyosh.worker.TaskRunner;
-import com.gyosh.worker.Utility;
+import com.gyosh.worker.utility.Util;
 import com.gyosh.worker.task.*;
 import org.apache.log4j.Logger;
 
@@ -68,7 +68,7 @@ public class Main {
             public void actionPerformed(ActionEvent actionEvent) {
                 List<String> inputErrors = validateInput();
                 if (inputErrors.size() > 0) {
-                    JOptionPane.showMessageDialog(null, Utility.join(inputErrors, "\n"));
+                    JOptionPane.showMessageDialog(null, Util.join(inputErrors, "\n"));
                     return;
                 }
 

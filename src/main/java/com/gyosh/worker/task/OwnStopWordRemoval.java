@@ -1,6 +1,6 @@
 package com.gyosh.worker.task;
 
-import com.gyosh.worker.Utility;
+import com.gyosh.worker.utility.Util;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class OwnStopWordRemoval implements Task {
         stringProcessed = 0;
         totalString = doc.size();
 
-        ownStopWords = Utility.readList(ownStopWordFilename);
+        ownStopWords = Util.readList(ownStopWordFilename);
 
         for (int i = 0; i < doc.size(); i++) {
             doc.set(i, removeOwnStopWord(doc.get(i)));

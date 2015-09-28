@@ -1,6 +1,7 @@
 package com.gyosh.worker.task;
 
-import com.gyosh.worker.Utility;
+import com.gyosh.worker.utility.TcpStyleTimer;
+import com.gyosh.worker.utility.Util;
 import org.apache.log4j.Logger;
 import org.reficio.ws.builder.*;
 import org.reficio.ws.builder.core.Wsdl;
@@ -34,12 +35,14 @@ public class StopWordRemoval implements Task {
     private SoapClient client;
     private Transformer transformer;
     private DocumentBuilder docBuilder;
+    private TcpStyleTimer tcpStyleTimer;
     private int stringProcessed;
     private int totalString;
 
     public List<List<String>> exec(List<List<String>> doc) {
         stringProcessed = 0;
         totalString = doc.size();
+        tcpStyleTimer = new TcpStyleTimer();
 
         initSoapClient();
         initRequestBuilder();
@@ -93,7 +96,7 @@ public class StopWordRemoval implements Task {
 
     private List<String> removeStopWord(List<String> tokens) {
         Node word = requestXml.getElementsByTagName(REQUEST_FIELD).item(0);
-        word.setTextContent(Utility.join(tokens, " "));
+        word.setTextContent(Util.join(tokens, " "));
 
         String request = "";
         try {
@@ -104,7 +107,19 @@ public class StopWordRemoval implements Task {
             logger.error(e.getMessage());
         }
 
-        String response = client.post(request);
+        String response = "";
+        boolean success = false;
+        tcpStyleTimer.init();
+        while (!success) {
+            try {
+                response = client.post(request);
+                tcpStyleTimer.blockingWait();
+                success = true;
+            } catch (Exception e) {
+                logger.info("Stemming timeout, retrying with " + tcpStyleTimer.getWaitMilis() + " ms delay");
+            }
+        }
+
         return parseResponse(response);
     }
 

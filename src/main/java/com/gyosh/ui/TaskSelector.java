@@ -1,6 +1,6 @@
 package com.gyosh.ui;
 
-import com.gyosh.worker.Utility;
+import com.gyosh.worker.utility.Util;
 import com.gyosh.worker.factory.*;
 import com.gyosh.worker.task.Task;
 
@@ -86,7 +86,7 @@ public class TaskSelector extends JDialog {
         List<String> inputErrors = selectedTaskFactory.validateInput();
 
         if (inputErrors.size() > 0) {
-            JOptionPane.showMessageDialog(null, Utility.join(inputErrors, "\n"));
+            JOptionPane.showMessageDialog(null, Util.join(inputErrors, "\n"));
             return;
         }
 
