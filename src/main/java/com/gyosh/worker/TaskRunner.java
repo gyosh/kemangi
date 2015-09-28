@@ -24,6 +24,7 @@ public class TaskRunner {
     private int totalTaskWeight;
     private int currentTaskWeight;
     private String currentActivity;
+    private Task currentTask;
 
     public TaskRunner(String inputFilePath, String outputFilePath) {
         this.inputFilePath = inputFilePath;
@@ -40,19 +41,21 @@ public class TaskRunner {
     public void run() {
         totalTaskWeight = WEIGHT_READ_INPUT + taskQueue.size() + WEIGHT_WRITE_OUTPUT;
         currentTaskWeight = 0;
+        currentTask = null;
 
         currentActivity = STATUS_READING;
         doc = Utility.loadAndSanitizeDocument(inputFilePath);
         currentTaskWeight += WEIGHT_READ_INPUT;
 
         while (!taskQueue.isEmpty()) {
-            Task currentTask = taskQueue.poll();
+            currentTask = taskQueue.poll();
 
             doc = currentTask.exec(doc);
             currentTaskWeight++;
             currentActivity = currentTask.toString();
         }
 
+        currentTask = null;
         currentActivity = STATUS_WRITING;
         exportDocument();
         currentTaskWeight += WEIGHT_WRITE_OUTPUT;
@@ -61,10 +64,19 @@ public class TaskRunner {
     }
 
     public int getProgressPercentage() {
-        return 100 * currentTaskWeight / totalTaskWeight;
+        double progress = (double)currentTaskWeight/totalTaskWeight;
+
+        if (currentTask != null) {
+            progress += currentTask.getProgressPercentage()/(100.0 * totalTaskWeight);
+        }
+
+        return (int)Math.ceil(progress*100);
     }
 
-    public String getActivity() {
+    public String getCurrentActivity() {
+        if (currentTask != null) {
+            return currentTask.getCurrentActivity();
+        }
         return currentActivity;
     }
 

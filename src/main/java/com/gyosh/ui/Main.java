@@ -73,8 +73,11 @@ public class Main {
                 }
 
                 taskRunner = new TaskRunner(inputFilePath.getText(), outputFilePath.getText());
+                logger.info("New task runner");
                 for (int i = 0; i < taskListModel.getSize(); i++) {
-                    taskRunner.addTask((Task)taskListModel.get(i));
+                    Task task = (Task)taskListModel.get(i);
+                    taskRunner.addTask(task);
+                    logger.info("New task added: " + task.toString());
                 }
 
                 progressBar.setMinimum(0);
@@ -162,7 +165,7 @@ public class Main {
         progressBar.setValue(taskRunner.getProgressPercentage());
         progressBar.updateUI();
 
-        progressLog.setText(taskRunner.getActivity());
+        progressLog.setText(taskRunner.getCurrentActivity());
     }
 
     private List<String> validateInput() {

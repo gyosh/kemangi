@@ -12,16 +12,22 @@ public class OwnStopWordRemoval implements Task {
 
     private String ownStopWordFilename;
     private List<String> ownStopWords;
+    private int stringProcessed;
+    private int totalString;
 
     public OwnStopWordRemoval(String ownStopWordFilename) {
         this.ownStopWordFilename = ownStopWordFilename;
     }
 
     public List<List<String>> exec(List<List<String>> doc) {
+        stringProcessed = 0;
+        totalString = doc.size();
+
         ownStopWords = Utility.readList(ownStopWordFilename);
 
         for (int i = 0; i < doc.size(); i++) {
             doc.set(i, removeOwnStopWord(doc.get(i)));
+            stringProcessed++;
         }
         return doc;
     }
@@ -48,6 +54,14 @@ public class OwnStopWordRemoval implements Task {
             }
         }
         return false;
+    }
+
+    public int getProgressPercentage() {
+        return 100 * stringProcessed / totalString;
+    }
+
+    public String getCurrentActivity() {
+        return TASK_NAME + " (" + stringProcessed + "/" + totalString + ")";
     }
 
     public String toString() {

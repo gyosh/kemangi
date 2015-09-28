@@ -34,14 +34,20 @@ public class StopWordRemoval implements Task {
     private SoapClient client;
     private Transformer transformer;
     private DocumentBuilder docBuilder;
+    private int stringProcessed;
+    private int totalString;
 
     public List<List<String>> exec(List<List<String>> doc) {
+        stringProcessed = 0;
+        totalString = doc.size();
+
         initSoapClient();
         initRequestBuilder();
         initRequestEditor();
 
         for (int i = 0; i < doc.size(); i++) {
             doc.set(i, removeStopWord(doc.get(i)));
+            stringProcessed++;
         }
 
         return doc;
@@ -114,6 +120,14 @@ public class StopWordRemoval implements Task {
             logger.error(e.getMessage());
         }
         return Arrays.asList(ret.trim().split(" "));
+    }
+
+    public int getProgressPercentage() {
+        return 100 * stringProcessed / totalString;
+    }
+
+    public String getCurrentActivity() {
+        return TASK_NAME + " (" + stringProcessed + "/" + totalString + ")";
     }
 
     public String toString() {
