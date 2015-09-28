@@ -93,7 +93,17 @@ public class Main {
                     public void run() {
                         progressTicker.start();
 
-                        taskRunner.run();
+                        try {
+                            taskRunner.run();
+                        } catch (Exception e) {
+                            logger.error(e.getMessage());
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Error occurred, see kemangi.log for more information.",
+                                    "Execution error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
 
                         progressTicker.stop();
                         EventQueue.invokeLater(new Runnable() {

@@ -42,7 +42,7 @@ public class TaskRunner {
         taskQueue.add(task);
     }
 
-    public void run() {
+    public void run() throws Exception{
         initRun();
         readInput();
 
@@ -51,6 +51,7 @@ public class TaskRunner {
 
             logger.info("Executing " + currentTask.toString());
             doc = currentTask.exec(doc);
+
             currentTaskWeight++;
             currentActivity = currentTask.toString();
         }
