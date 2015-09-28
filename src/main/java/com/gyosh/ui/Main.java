@@ -6,6 +6,7 @@ import com.gyosh.worker.task.*;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -95,7 +96,11 @@ public class Main {
                         taskRunner.run();
 
                         progressTicker.stop();
-                        updateProgress();
+                        EventQueue.invokeLater(new Runnable() {
+                            public void run() {
+                                updateProgress();
+                            }
+                        });
                     }
                 };
                 new Thread(taskRunnerWrapper).start();
