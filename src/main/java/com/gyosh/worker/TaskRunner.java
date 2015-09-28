@@ -2,6 +2,7 @@ package com.gyosh.worker;
 
 import com.gyosh.worker.task.*;
 import com.gyosh.worker.utility.Util;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -16,6 +17,8 @@ public class TaskRunner {
 
     private static final int WEIGHT_READ_INPUT = 1;
     private static final int WEIGHT_WRITE_OUTPUT = 1;
+
+    private static final Logger logger = Logger.getLogger(TaskRunner.class);
 
     private String inputFilePath;
     private String outputFilePath;
@@ -40,28 +43,44 @@ public class TaskRunner {
     }
 
     public void run() {
-        totalTaskWeight = WEIGHT_READ_INPUT + taskQueue.size() + WEIGHT_WRITE_OUTPUT;
-        currentTaskWeight = 0;
-        currentTask = null;
-
-        currentActivity = STATUS_READING;
-        doc = Util.loadAndSanitizeDocument(inputFilePath);
-        currentTaskWeight += WEIGHT_READ_INPUT;
+        initRun();
+        readInput();
 
         while (!taskQueue.isEmpty()) {
             currentTask = taskQueue.poll();
 
+            logger.info("Executing " + currentTask.toString());
             doc = currentTask.exec(doc);
             currentTaskWeight++;
             currentActivity = currentTask.toString();
         }
 
-        currentTask = null;
-        currentActivity = STATUS_WRITING;
-        exportDocument();
-        currentTaskWeight += WEIGHT_WRITE_OUTPUT;
+        writeOutput();
 
         currentActivity = STATUS_DONE;
+        logger.info(STATUS_DONE);
+    }
+
+    private void initRun() {
+        logger.info("Initializing task runner");
+        totalTaskWeight = WEIGHT_READ_INPUT + taskQueue.size() + WEIGHT_WRITE_OUTPUT;
+        currentTaskWeight = 0;
+    }
+
+    private void readInput() {
+        currentTask = null;
+        currentActivity = STATUS_READING;
+        logger.info(STATUS_READING);
+        doc = Util.loadAndSanitizeDocument(inputFilePath);
+        currentTaskWeight += WEIGHT_READ_INPUT;
+    }
+
+    private void writeOutput() {
+        currentTask = null;
+        currentActivity = STATUS_WRITING;
+        logger.info(STATUS_WRITING);
+        exportDocument();
+        currentTaskWeight += WEIGHT_WRITE_OUTPUT;
     }
 
     public int getProgressPercentage() {
