@@ -1,5 +1,6 @@
 package com.gyosh.worker.utility;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -65,5 +66,17 @@ public class Util {
         }
 
         return stringBuilder.toString();
+    }
+
+    public static String getResourceContent(String fileName){
+        String result = "";
+        ClassLoader classLoader = Util.class.getClassLoader();
+        try {
+            result = IOUtils.toString(classLoader.getResourceAsStream(fileName));
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+
+        return result;
     }
 }

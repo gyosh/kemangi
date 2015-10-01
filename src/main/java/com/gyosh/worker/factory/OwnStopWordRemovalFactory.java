@@ -3,6 +3,7 @@ package com.gyosh.worker.factory;
 
 import com.gyosh.worker.task.OwnStopWordRemoval;
 import com.gyosh.worker.task.Task;
+import com.gyosh.worker.utility.Util;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,13 +25,7 @@ public class OwnStopWordRemovalFactory implements TaskFactory {
     }
 
     public String getDescription() {
-        // TODO: real description
-        return "Own Stop Word Description";
-    }
-
-    public String getIncludedTask() {
-        // TODO: real included task
-        return "Own Stop Word Task";
+        return Util.getResourceContent("taskDescription/OwnStopWordRemoval.html");
     }
 
     public JPanel getParameterPanel() {

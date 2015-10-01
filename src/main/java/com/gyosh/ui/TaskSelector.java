@@ -7,7 +7,12 @@ import com.gyosh.worker.task.Task;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.List;
 
 public class TaskSelector extends JDialog {
@@ -15,7 +20,7 @@ public class TaskSelector extends JDialog {
     private JButton selectButton;
     private JButton cancelButton;
     private JList taskFactoryList;
-    private JLabel taskDescription;
+    private JTextPane taskDescription;
     private JPanel mainPanel;
     private JPanel parameterPanel;
 
@@ -103,10 +108,11 @@ public class TaskSelector extends JDialog {
     }
 
     private void updateFieldOnSelection() {
+        JPanel panel = selectedTaskFactory.getParameterPanel();
         taskDescription.setText(selectedTaskFactory.getDescription());
 
         parameterPanel.removeAll();
-        parameterPanel.add(selectedTaskFactory.getParameterPanel());
+        parameterPanel.add(panel);
 
         parameterPanel.revalidate();
         parameterPanel.repaint();

@@ -2,6 +2,7 @@ package com.gyosh.worker.factory;
 
 import com.gyosh.worker.task.CaseFolding;
 import com.gyosh.worker.task.Task;
+import com.gyosh.worker.utility.Util;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -16,13 +17,7 @@ public class CaseFoldingFactory implements TaskFactory{
     }
 
     public String getDescription() {
-        // TODO: real description
-        return "Case Folding Description";
-    }
-
-    public String getIncludedTask() {
-        // TODO: real included task
-        return "Case Folding Task";
+        return Util.getResourceContent("taskDescription/CaseFolding.html");
     }
 
     public JPanel getParameterPanel() {

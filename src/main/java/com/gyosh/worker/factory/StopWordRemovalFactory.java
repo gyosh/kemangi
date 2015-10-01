@@ -3,6 +3,7 @@ package com.gyosh.worker.factory;
 import com.gyosh.worker.task.Stem;
 import com.gyosh.worker.task.StopWordRemoval;
 import com.gyosh.worker.task.Task;
+import com.gyosh.worker.utility.Util;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -17,13 +18,7 @@ public class StopWordRemovalFactory implements TaskFactory{
     }
 
     public String getDescription() {
-        // TODO: real description
-        return "Description";
-    }
-
-    public String getIncludedTask() {
-        // TODO: real included task
-        return "Task";
+        return Util.getResourceContent("taskDescription/StopWordRemoval.html");
     }
 
     public JPanel getParameterPanel() {
