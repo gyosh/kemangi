@@ -116,7 +116,7 @@ public class StopWordRemoval implements Task {
                 tcpStyleTimer.blockingWait();
                 success = true;
             } catch (Exception e) {
-                logger.info("Stemming timeout, retrying with " + tcpStyleTimer.getWaitMilis() + " ms delay");
+                logger.info("Stop word removal timeout, retrying with " + tcpStyleTimer.getWaitMilis() + " ms delay");
             }
         }
 
