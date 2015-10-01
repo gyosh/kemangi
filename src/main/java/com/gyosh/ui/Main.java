@@ -99,7 +99,7 @@ public class Main {
                             logger.error(e.getMessage());
                             JOptionPane.showMessageDialog(
                                     null,
-                                    "Error occurred, see kemangi.log for more information.",
+                                    "Error occurred, see kemangi.log for more information.\nSee " + TaskRunner.CRASH_FILE_NAME + " for current result",
                                     "Execution error",
                                     JOptionPane.ERROR_MESSAGE
                             );

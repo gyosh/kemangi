@@ -3,9 +3,7 @@ package com.gyosh.worker.utility;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,5 +76,38 @@ public class Util {
         }
 
         return result;
+    }
+
+    public static void exportDocument(String outputPath, List<List<String>> doc) {
+        try {
+            FileWriter fw = new FileWriter(outputPath);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (List<String> tokens : doc) {
+                for (int i = 0; i < tokens.size(); i++) {
+                    bw.write(tokens.get(i));
+                    if (i + 1 < tokens.size()) {
+                        bw.write(" ");
+                    }
+                }
+                bw.newLine();
+            }
+
+            bw.close();
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
+
+    public static List<List<String>> clone(List<List<String>> doc) {
+        List<List<String>> docClone = new ArrayList<List<String>>();
+        for (List<String> tokens : doc) {
+            List<String> tokensClone = new ArrayList<String>();
+            for (String token : tokens) {
+                tokensClone.add(token);
+            }
+            docClone.add(tokensClone);
+        }
+        return docClone;
     }
 }

@@ -5,11 +5,15 @@ import com.gyosh.worker.utility.Util;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class TaskRunner {
+    public static final String CRASH_FILE_NAME = "intermediateResult.o";
+
     private static final String STATUS_WAITING = "Waiting for input...";
     private static final String STATUS_READING = "Reading input...";
     private static final String STATUS_WRITING = "Writing output...";
@@ -24,6 +28,7 @@ public class TaskRunner {
     private String outputFilePath;
     private Queue<Task> taskQueue;
     private List<List<String>> doc;
+    private List<List<String>> docClone;
 
     private int totalTaskWeight;
     private int currentTaskWeight;
@@ -42,7 +47,7 @@ public class TaskRunner {
         taskQueue.add(task);
     }
 
-    public void run() throws Exception{
+    public void run() throws Exception {
         initRun();
         readInput();
 
@@ -50,7 +55,13 @@ public class TaskRunner {
             currentTask = taskQueue.poll();
 
             logger.info("Executing " + currentTask.toString());
-            doc = currentTask.exec(doc);
+            docClone = Util.clone(doc);
+            try {
+                doc = currentTask.exec(doc);
+            } catch (Exception e){
+                Util.exportDocument(CRASH_FILE_NAME, docClone);
+                throw e;
+            }
 
             currentTaskWeight++;
             currentActivity = currentTask.toString();
@@ -80,7 +91,7 @@ public class TaskRunner {
         currentTask = null;
         currentActivity = STATUS_WRITING;
         logger.info(STATUS_WRITING);
-        exportDocument();
+        Util.exportDocument(outputFilePath, doc);
         currentTaskWeight += WEIGHT_WRITE_OUTPUT;
     }
 
@@ -99,26 +110,5 @@ public class TaskRunner {
             return currentTask.getCurrentActivity();
         }
         return currentActivity;
-    }
-
-    private void exportDocument() {
-        try {
-            FileWriter fw = new FileWriter(outputFilePath);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            for (List<String> tokens : doc) {
-                for (int i = 0; i < tokens.size(); i++) {
-                    bw.write(tokens.get(i));
-                    if (i + 1 < tokens.size()) {
-                        bw.write(" ");
-                    }
-                }
-                bw.newLine();
-            }
-
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

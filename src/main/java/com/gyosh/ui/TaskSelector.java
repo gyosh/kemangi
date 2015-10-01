@@ -36,6 +36,7 @@ public class TaskSelector extends JDialog {
     private Task taskCreated;
 
     public TaskSelector() {
+        this.setTitle("Select Task");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(selectButton);
