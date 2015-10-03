@@ -116,7 +116,7 @@ public class Stem implements Task {
                 tcpStyleTimer.blockingWait();
                 success = true;
             } catch (Exception e) {
-                logger.info("Stemming timeout, retrying with " + tcpStyleTimer.getWaitMilis() + " ms delay");
+                logger.info("Stemming timeout, retrying with " + tcpStyleTimer.getCurrentWaitMilis() + " ms delay");
             }
         }
 

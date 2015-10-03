@@ -11,7 +11,7 @@ import java.util.List;
 public class Util {
     private static final Logger logger = Logger.getLogger(Util.class);
 
-    public static String removeNonAscii(String line) {
+    public static String replaceNonAsciiWithSpace(String line) {
         return line.replaceAll("[^\\p{ASCII}]", " ");
     }
 
@@ -23,7 +23,15 @@ public class Util {
 
             String line = br.readLine();
             while (line != null) {
-                List<String> tokens = Arrays.asList(removeNonAscii(line).trim().split("\\s+"));
+                String sanitizedString = replaceNonAsciiWithSpace(line).trim();
+
+                List<String> tokens;
+                if (sanitizedString.length() > 0) {
+                    tokens = Arrays.asList(sanitizedString.split("\\s+"));
+                } else {
+                    tokens = new ArrayList<String>();
+                }
+
                 doc.add(tokens);
                 line = br.readLine();
             }

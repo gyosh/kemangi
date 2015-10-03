@@ -1,0 +1,5 @@
+rp
+koq
+nih
+http://.*
+#.*

@@ -4,15 +4,12 @@ import com.gyosh.worker.task.*;
 import com.gyosh.worker.utility.Util;
 import org.apache.log4j.Logger;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class TaskRunner {
-    public static final String CRASH_FILE_NAME = "intermediateResult.o";
+    public static final String CRASH_FILE_NAME = "intermediateResult.bak";
 
     private static final String STATUS_WAITING = "Waiting for input...";
     private static final String STATUS_READING = "Reading input...";
