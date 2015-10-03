@@ -44,7 +44,7 @@ public class UtilTest {
 
     @Test
     public void testReadList() {
-        List<String> list = Util.readList("src/test/resources/test-list.txt");
+        List<String> list = Util.readList("src/test/resources/test-stop-word-list.txt");
         List<String> expectedList = Arrays.asList("rp", "koq", "nih", "http://.*", "#.*");
 
         assertEquals("Should have the same length", list.size(), expectedList.size());
