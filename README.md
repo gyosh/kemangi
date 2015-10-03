@@ -54,14 +54,18 @@ Kemangi consumes the web service, and you can easily use that webservice.
 ### Stemming
 Right from the inventor of [Indonesian Language's stemming algorithm](http://dl.acm.org/citation.cfm?id=1316459), [web service](http://fws.cs.ui.ac.id/StopwordRemover/StopwordRemover?wsdl) is also provided.
 
-## Development
-Started at 30/4/14 as command line tool. 
-Developed as a request from Industrial Engineering students who were conducting text mining researches.
+## Downloads
 
-Got another feature request by 8/4/15, from next batch's students.
-Now Kemangi is maintained and evolving towards something like [Weka](http://www.cs.waikato.ac.nz/ml/weka).
+* [kemangi-v1.0.0](https://github.com/gyosh/kemangi/releases/download/v1.0.0/kemangi-1.0.0.jar)
 
-Currently under development, no stable release is ready.
+## Installation
+
+1. Download [Kemangi](#downloads)
+2. Download and install [Java Runtime Environment](http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html)
+3. For Windows user, double click on the downloaded Kemangi application. For Linux user:
+```
+java -jar path/to/kemangi-VERSION.jar
+```
 
 ## Term And Condition
 By using Kemangi, you need to agree for this [term and condition](http://fws.cs.ui.ac.id/StemmerSampleClient/TermAndCondition.jsp).
