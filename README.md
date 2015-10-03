@@ -13,23 +13,24 @@ Raw text:
 
 ```
 Mempermainkan peranan 12 domba di pementasan
-ALAyISME iTu UmUUM
-Saya tidur... jam 12:30 kemarin
+ALAyISME iTu TETAP ada di Jakarta
+Saya tidur... kemarin
 Pin  BB saya   B12A3FC
 bbm koq naik, warga sedih #edisicurhat
-website http://www.lucu.com diblokir menko
+dia memblokir website http://www.lucu.com
 éà ada karakter ga jelas, non ASCII appeared! #wow
 Pak kepala desa tidak tahu bahwa 3 pencuri di rumah itu adalah teman lamanya!
 ```
 
-Processed text:
+After case folding, non-alphanumeric removal, stop words removal, and stemming:
+
 ```
 main peran 12 domba pentas
-alayisme umuum
-tidur jam 12 30 kemarin
+alayisme tetap jakarta
+tidur kemarin
 pin bb b12a3fc
 bbm naik warga sedih
-website blokir menko
+blokir website
 karakter ga jelas non ascii appeared
 pak kepala desa tahu 3 curi rumah teman
 ```
