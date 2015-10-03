@@ -1,3 +1,5 @@
-hello
-wow
-https?://.*
+rp
+koq
+nih
+http://.*
+#.*

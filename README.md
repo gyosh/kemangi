@@ -7,6 +7,33 @@ Also known as Bahasa Indonesia.
 Java based application to pre-process your Indonesian Language texts, for further intelligent stuff you are going to do such as text mining.
 Several features consume web service provided by [University of Indonesia's Information Retrieval Lab](http://bahasa.cs.ui.ac.id/webservices.php).
 
+## Example
+
+Raw text:
+
+```
+Mempermainkan peranan 12 domba di pementasan
+ALAyISME iTu UmUUM
+Saya tidur... jam 12:30 kemarin
+Pin  BB saya   B12A3FC
+bbm koq naik, warga sedih #edisicurhat
+website http://www.lucu.com diblokir menko
+éà ada karakter ga jelas, non ASCII appeared! #wow
+Pak kepala desa tidak tahu bahwa 3 pencuri di rumah itu adalah teman lamanya!
+```
+
+Processed text:
+```
+main peran 12 domba pentas
+alayisme umuum
+tidur jam 12 30 kemarin
+pin bb b12a3fc
+bbm naik warga sedih
+website blokir menko
+karakter ga jelas non ascii appeared
+pak kepala desa tahu 3 curi rumah teman
+```
+
 ## Features
 
 ### Remove non-ASCII characters
