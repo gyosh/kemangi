@@ -142,6 +142,9 @@ public class StopWordRemoval implements Task {
     }
 
     public String getCurrentActivity() {
+        if (stringProcessed == 0) {
+            return TASK_NAME + " (connecting to server)";
+        }
         return TASK_NAME + " (" + stringProcessed + "/" + totalString + ")";
     }
 
