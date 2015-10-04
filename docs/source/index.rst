@@ -12,3 +12,4 @@ Here is what might help you:
     installation
     basic_operation
     task_list
+    developer_guide
