@@ -14,6 +14,12 @@ Plain Text File
 
 To do text preprocessing, you need to supply input file, list of tasks, and output target.
 
+Here is a screenshot of a running Kemangi process to give a better understanding:
+
+..  image:: assets/running-kemangi.png
+    :scale: 75 %
+    :align: center
+
 Input File
 ----------
 
@@ -24,7 +30,22 @@ List of Tasks
 -------------
 
 You can add several tasks, and Kemangi will run the task in the given order.
+
 To add a task, click "Add task". A window will appear and you can choose what kind of task to be added.
+
+..  image:: assets/select-task.png
+    :scale: 75 %
+    :align: center
+
+In general, there are three columns:
+
+ * Left column shows a list of available task, click one to choose.
+ * Middle column shows summary of chosen task.
+ * Right column shows additional inputs required. You need to supply these inputs if any is required.
+
+To remove a task, click on that task in the list, then click "Remove task".
+
+To move a task's order, click on that task in the list, then click "Move up" or "Move down".
 
 Some tasks may need additional inputs. For example, own stop words removal demands text file containing list of stop words provided by you.
 

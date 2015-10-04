@@ -11,12 +11,12 @@ The purpose of Kemangi is to clean up your text file so that it is easier to be 
 
 Kemangi provides basic task pre-processing task:
 
-# Remove non-ASCII characters
-# Remove non-alphanumeric characters
-# Case folding
-# Remove stop words (meaningless word)
-# Remove words according to pattern provided by you, e.g. hashtags, URLs, Twitter mentions, etc
-# Word stemming
+* Remove non-ASCII characters
+* Remove non-alphanumeric characters
+* Case folding
+* Remove stop words (meaningless word)
+* Remove words according to pattern provided by you, e.g. hashtags, URLs, Twitter mentions, etc
+* Word stemming
 
 Example
 -------
