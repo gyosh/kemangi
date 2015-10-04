@@ -69,6 +69,10 @@ Right from the inventor of [Indonesian Language's stemming algorithm](http://dl.
 java -jar path/to/kemangi-VERSION.jar
 ```
 
+## How to Use
+
+Check out [Kemangi's documentation](http://kemangi.readthedocs.org/en/latest/index.html).
+
 ## Term And Condition
 By using Kemangi, you need to agree for this [term and condition](http://fws.cs.ui.ac.id/StemmerSampleClient/TermAndCondition.jsp).
 
