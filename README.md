@@ -62,7 +62,9 @@ Right from the inventor of [Indonesian Language's stemming algorithm](http://dl.
 
 1. Download [Kemangi](#downloads)
 2. Download and install [Java Runtime Environment](http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html)
-3. For Windows user, double click on the downloaded Kemangi application. For Linux user:
+3. Run Kemangi:
+  * For Windows user, right click on downloaded Kemangi application, and select open with Java. 
+  * For Linux user:
 ```
 java -jar path/to/kemangi-VERSION.jar
 ```
