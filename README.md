@@ -56,7 +56,7 @@ Right from the inventor of [Indonesian Language's stemming algorithm](http://dl.
 
 ## Downloads
 
-* [kemangi-v1.0.0](https://github.com/gyosh/kemangi/releases/download/v1.0.0/kemangi-1.0.0.jar)
+* [kemangi-v1.0.0](https://github.com/gyosh/kemangi/releases/download/1.0.0/kemangi-1.0.0.jar)
 
 ## Installation
 
