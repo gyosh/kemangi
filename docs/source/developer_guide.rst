@@ -3,13 +3,18 @@ Developer Guide
 
 This section describes Kemangi's architecture for developer who might be interested to contribute.
 
+Tools
+-----
+Kemangi uses `Maven <https://maven.apache.org/>`_: Apache build manager for Java projects.
+By using Maven, dependencies, unit tests, and build options are configured under pom.xml.
+
 Package Structure
 -----------------
 
 Kemangi is mainly divided into two chunks: core and UI.
 
 Core package basically does the work, while UI acts like an adaptor between user and core package.
-With this structure, core an UI may evolve independently.
+With this structure, core and UI may evolve independently.
 
 Another adaptor can also built on top of core modules, e.g. for Kemangi's support as command line tool.
 

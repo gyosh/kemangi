@@ -61,5 +61,7 @@ Start Processing
 ----------------
 Click the "Start" button and text processing will start.
 
-When unexpected error occurs (required internet, but your connection is lost), Kemangi will print the latest preprocessed text "intermediateResult.bak" in Kemangi's directory.
+When unexpected error occurs (required internet, but your connection is lost), Kemangi will print the latest preprocessed text ``intermediateResult.bak`` in Kemangi's directory.
 It is a plain text file, and you can open it with any basic text editor.
+
+Kemangi also logs its activity in ``kemangi.log``. Log is useful to analyze what is going on when error happens.

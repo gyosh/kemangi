@@ -27,7 +27,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.gyosh.ui.Main</mainClass>
+                            <mainClass>com.gyosh.kemangi.ui.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
